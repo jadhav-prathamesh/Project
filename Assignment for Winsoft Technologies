@@ -1,0 +1,151 @@
+/*Q1: Merge two arrays by satisfying given constraints
+Given two sorted arrays X[] and Y[] of size m and n each where m >= n and X[] has exactly n vacant cells,
+ merge elements of Y[] in their correct position in array X[], i.e., merge (X, Y) by keeping the sorted order.
+
+For example,
+
+Input: X[] = { 0, 2, 0, 3, 0, 5, 6, 0, 0 }
+Y[] = { 1, 8, 9, 10, 15 } The vacant cells in X[] is represented by 0 
+Output: X[] = { 1, 2, 3, 5, 6, 8, 9, 10, 15 } */
+
+Code :
+import java.util.Arrays;
+
+public class MergeArrays {
+    public static void mergeArrays(int[] X, int[] Y) {
+        int m = X.length;
+        int n = Y.length;
+        int i = m - 1;
+        int j = n - 1;
+        int k = m - 1;
+
+        while (i >= 0 && j >= 0) {
+            if (X[i] != 0 && X[i] > Y[j]) {
+                X[k--] = X[i--];
+            } else {
+                X[k--] = Y[j--];
+            }
+        }
+
+        while (j >= 0) {
+            X[k--] = Y[j--];
+        }
+
+        System.out.println(Arrays.toString(X));
+    }
+
+    public static void main(String[] args) {
+        int[] X = {0, 2, 0, 3, 0, 5, 6, 0, 0};
+        int[] Y = {1, 8, 9, 10, 15};
+        mergeArrays(X, Y);
+    }
+}
+
+Q2:Find maximum sum path involving elements of given arrays
+Given two sorted arrays of integers, find a maximum sum path involving elements of both arrays whose sum is maximum. 
+We can start from either array, but we can switch between arrays only through its common elements.
+
+For example,
+
+Input: X = { 3, 6, 7, 8, 10, 12, 15, 18, 100 }
+Y = { 1, 2, 3, 5, 7, 9, 10, 11, 15, 16, 18, 25, 50 }  
+The maximum sum path is: 1 —> 2 —> 3 —> 6 —> 7 —> 9 —> 10 —> 12 —> 15 —> 16 —> 18 —> 100 
+The maximum sum is 199
+
+Code:
+public class MaxSumPath {
+    public static int maxSumPath(int[] X, int[] Y) {
+        int sumX = 0, sumY = 0, maxSum = 0;
+        int i = 0, j = 0;
+
+        while (i < X.length && j < Y.length) {
+            if (X[i] < Y[j]) {
+                sumX += X[i++];
+            } else if (X[i] > Y[j]) {
+                sumY += Y[j++];
+            } else {
+                maxSum += Math.max(sumX, sumY) + X[i];
+                sumX = 0;
+                sumY = 0;
+                i++;
+                j++;
+            }
+        }
+
+        while (i < X.length) {
+            sumX += X[i++];
+        }
+
+        while (j < Y.length) {
+            sumY += Y[j++];
+        }
+
+        maxSum += Math.max(sumX, sumY);
+
+        return maxSum;
+    }
+
+    public static void main(String[] args) {
+        int[] X = {3, 6, 7, 8, 10, 12, 15, 18, 100};
+        int[] Y = {1, 2, 3, 5, 7, 9, 10, 11, 15, 16, 18, 25, 50};
+        System.out.println("The maximum sum path is: " + maxSumPath(X, Y));
+    }
+}
+
+Q3:Write a Java Program to count the number of words in a string using HashMap.
+
+Code :
+import java.util.HashMap;
+
+public class WordCount {
+    public static void countWords(String str) {
+        String[] words = str.split("\\s+");
+        HashMap<String, Integer> wordCountMap = new HashMap<>();
+
+        for (String word : words) {
+            if (wordCountMap.containsKey(word)) {
+                wordCountMap.put(word, wordCountMap.get(word) + 1);
+            } else {
+                wordCountMap.put(word, 1);
+            }
+        }
+
+        for (String word : wordCountMap.keySet()) {
+            System.out.println(word + ": " + wordCountMap.get(word));
+        }
+    }
+
+    public static void main(String[] args) {
+        String inputString = "Java is a programming language. Java is widely used for developing various applications.";
+        countWords(inputString);
+    }
+}
+
+Q4:Write a Java Program to find the duplicate characters in a string.
+Code:
+public class DuplicateCharacters {  
+     public static void main(String[] args) {  
+        String string1 = "Great responsibility";  
+        int count;  
+          
+        //Converts given string into character array  
+        char string[] = string1.toCharArray();  
+          
+        System.out.println("Duplicate characters in a given string: ");  
+        //Counts each character present in the string  
+        for(int i = 0; i <string.length; i++) {  
+            count = 1;  
+            for(int j = i+1; j <string.length; j++) {  
+                if(string[i] == string[j] && string[i] != ' ') {  
+                    count++;  
+                    //Set string[j] to 0 to avoid printing visited character  
+                    string[j] = '0';  
+                }  
+            }  
+            //A character is considered as duplicate if count is greater than 1  
+            if(count > 1 && string[i] != '0')  
+                System.out.println(string[i]);  
+        }  
+    }  
+}  
+
