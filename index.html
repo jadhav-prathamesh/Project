@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Snake</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="app">
+    <section class="panel">
+      <header class="panel__header">
+        <div>
+          <h1>Snake</h1>
+          <p class="subtitle">Classic grid movement, food, score, game-over, and restart.</p>
+        </div>
+        <div class="scoreboard" aria-live="polite">
+          <span>Score</span>
+          <strong id="score">0</strong>
+        </div>
+      </header>
+
+      <div class="status-row">
+        <p id="status">Press any arrow key or WASD to start.</p>
+        <div class="actions">
+          <button id="pause-button" type="button">Pause</button>
+          <button id="restart-button" type="button">Restart</button>
+        </div>
+      </div>
+
+      <div
+        id="board"
+        class="board"
+        role="grid"
+        aria-label="Snake game board"
+      ></div>
+
+      <section class="controls" aria-label="Touch controls">
+        <button data-direction="up" type="button">Up</button>
+        <div class="controls__middle">
+          <button data-direction="left" type="button">Left</button>
+          <button data-direction="down" type="button">Down</button>
+          <button data-direction="right" type="button">Right</button>
+        </div>
+      </section>
+
+      <p class="help-text">Controls: Arrow keys or WASD. Pause to stop the tick timer. Restart to reset the board.</p>
+    </section>
+  </main>
+
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>
